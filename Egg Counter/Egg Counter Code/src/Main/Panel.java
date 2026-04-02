@@ -1,4 +1,4 @@
-package src;
+package src.Main;
 import java.io.InputStream;
 
 import java.awt.*;

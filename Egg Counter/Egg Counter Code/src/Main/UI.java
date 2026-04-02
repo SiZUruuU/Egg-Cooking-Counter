@@ -1,4 +1,4 @@
-package src;
+package src.Main;
 
 import java.io.InputStream;
 
@@ -6,13 +6,13 @@ import java.awt.*;
 import java.io.IOException;
 
 import javax.swing.*;
-import java.text.DecimalFormat;
 
 public class UI {
 
     Panel panel;
     Graphics2D g2;
-    Font maruMonica;
+    Font maruMonica, purisa;
+    Image egg;
 
     public UI(Panel panel){
         this.panel = panel;
@@ -21,15 +21,27 @@ public class UI {
             InputStream is = getClass().getResourceAsStream("/res/font/x12y16pxMaruMonica.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
 
+            is = getClass().getResourceAsStream("/res/font/Purisa Bold.ttf");
+            purisa = Font.createFont(Font.TRUETYPE_FONT, is);
+
         }catch(FontFormatException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        egg = new ImageIcon(getClass().getResource("/res/asset/Smaller egg.png")).getImage();
+
     }
 
     public void draw(Graphics2D g2){
         title(g2);
+        drawImage(g2);
+    }
+
+    public void drawImage(Graphics2D g2){
+
+        g2.drawImage(egg,200,350,100,100, null);
     }
 
     public void screen(){}
@@ -48,6 +60,16 @@ public class UI {
 
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25));
+        text = "> > >Press Egg to Start< < <";
+
+        x =  getXforCenteredText(g2, text);
+        y =  panel.screenHeight - 180;
+
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
 
     }
 

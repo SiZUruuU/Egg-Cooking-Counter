@@ -1,4 +1,4 @@
-package src;
+package src.Main;
 import javax.swing.JFrame;
 
 public class EggCounter {
