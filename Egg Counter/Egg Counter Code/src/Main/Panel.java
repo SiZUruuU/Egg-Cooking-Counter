@@ -11,6 +11,8 @@ public class Panel extends JPanel {
 
     Graphics2D g2;
     UI ui = new UI(this);
+    MouseHandler mouse = new MouseHandler(ui, this);
+    
 
     final int screenWidth = 500;
     final int screenHeight = 650;
@@ -25,6 +27,8 @@ public class Panel extends JPanel {
         this.setLayout(null);
         this.setDoubleBuffered(true);
 
+        this.addMouseListener(mouse);
+
         try{
             InputStream is = getClass().getResourceAsStream("/res/font/x12y16pxMaruMonica.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -33,6 +37,10 @@ public class Panel extends JPanel {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if(ui.eggCount > 0){
+            System.out.print("Clicked!");        
         }
     }
 

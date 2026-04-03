@@ -13,6 +13,7 @@ public class UI {
     Graphics2D g2;
     Font maruMonica, purisa;
     Image egg;
+    int eggCount;
 
     public UI(Panel panel){
         this.panel = panel;
@@ -69,8 +70,6 @@ public class UI {
 
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
-
-
     }
 
         public int getXforCenteredText(Graphics2D g2, String text){

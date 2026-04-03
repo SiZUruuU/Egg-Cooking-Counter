@@ -17,9 +17,5 @@ public class EggCounter {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
-
-
-        
     }  
 }
