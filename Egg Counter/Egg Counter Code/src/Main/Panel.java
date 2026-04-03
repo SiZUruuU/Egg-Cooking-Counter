@@ -22,7 +22,6 @@ public class Panel extends JPanel {
     public Panel(){
         
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.decode("#FFD872"));
         
         this.setLayout(null);
         this.setDoubleBuffered(true);

@@ -13,7 +13,7 @@ public class UI {
     Graphics2D g2;
     Font maruMonica, purisa;
     Image egg;
-    int eggCount;
+    int eggCount = 0;
 
     public UI(Panel panel){
         this.panel = panel;
@@ -36,8 +36,15 @@ public class UI {
     }
 
     public void draw(Graphics2D g2){
-        title(g2);
-        drawImage(g2);
+
+        if(eggCount == 0){
+            panel.setBackground(Color.decode("#FFD872"));
+            title(g2);
+            drawImage(g2);
+        }
+        else if(eggCount == 1){
+            panel.setBackground(Color.decode("#f8da8f"));
+        }
     }
 
     public void drawImage(Graphics2D g2){

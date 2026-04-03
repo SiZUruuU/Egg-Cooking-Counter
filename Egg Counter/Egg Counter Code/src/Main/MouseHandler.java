@@ -18,10 +18,11 @@ public class MouseHandler implements MouseListener {
         int y = e.getY();
         System.out.print("Clicked at (" + x + "," + y + ")");
 
-        if(x > 100 && x < 300 && y > 400 && y < 450){
-            ui.eggCount++;
-            System.out.println("Egg count: " + ui.eggCount);
-            panel.repaint(); 
+        if(ui.eggCount == 0){
+            if(x > 100 && x < 350 && y > 350 && y < 450){
+                ui.eggCount++;
+                panel.repaint(); 
+            }
         }
     }
     
