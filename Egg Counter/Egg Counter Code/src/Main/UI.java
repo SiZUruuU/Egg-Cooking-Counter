@@ -12,8 +12,8 @@ public class UI {
     Panel panel;
     Graphics2D g2;
     Font maruMonica, purisa;
-    Image egg;
-    int eggCount = 0;
+    Image egg1, egg2, egg3, egg4, egg5, egg6, bg;
+    int uiCount = 0, eggCount = 0;
 
     public UI(Panel panel){
         this.panel = panel;
@@ -31,25 +31,47 @@ public class UI {
             e.printStackTrace();
         }
 
-        egg = new ImageIcon(getClass().getResource("/res/asset/Smaller egg.png")).getImage();
+        egg1 = new ImageIcon(getClass().getResource("/res/asset/Smaller egg.png")).getImage();
+        egg2 = new ImageIcon(getClass().getResource("/res/asset/Smaller egg cracked 1.png")).getImage();
+        egg3 = new ImageIcon(getClass().getResource("/res/asset/Smaller egg cracked 2.png")).getImage();
+        egg4 = new ImageIcon(getClass().getResource("/res/asset/Smaller egg cracked 3.png")).getImage();
+        egg5 = new ImageIcon(getClass().getResource("/res/asset/Smaller egg cracked 4.png")).getImage();
+        egg6 = new ImageIcon(getClass().getResource("/res/asset/Smaller egg cracked 5.png")).getImage();
+
+        bg = new ImageIcon(getClass().getResource("/res/asset/trial.png")).getImage();
 
     }
 
     public void draw(Graphics2D g2){
 
-        if(eggCount == 0){
+        if(uiCount == 0){
             panel.setBackground(Color.decode("#FFD872"));
             title(g2);
             drawImage(g2);
         }
-        else if(eggCount == 1){
+        else if(uiCount == 1){
             panel.setBackground(Color.decode("#f8da8f"));
+            drawImage(g2);
         }
     }
 
     public void drawImage(Graphics2D g2){
 
-        g2.drawImage(egg,200,350,100,100, null);
+        if(uiCount == 0){
+            switch(eggCount){
+
+                case 0: g2.drawImage(egg1,200,350,100,100, null); break;
+                case 1: g2.drawImage(egg2,200,350,100,100, null); break;
+                case 2: g2.drawImage(egg3,200,350,100,100, null); break;
+                case 3: g2.drawImage(egg4,200,350,100,100, null); break;
+                case 4: g2.drawImage(egg5,200,350,100,100, null); break;
+                case 5: g2.drawImage(egg6,200,350,100,100, null); break;
+            }       
+        }
+    
+        else if(uiCount == 1){
+            g2.drawImage(bg, 0,0,500,650,null);
+        }
     }
 
     public void screen(){}
