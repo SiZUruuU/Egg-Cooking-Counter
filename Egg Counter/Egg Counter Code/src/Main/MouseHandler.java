@@ -19,7 +19,7 @@ public class MouseHandler implements MouseListener {
         System.out.print("Clicked at (" + x + "," + y + ")");
 
         if(ui.uiCount == 0){
-            if(x > 100 && x < 350 && y > 350 && y < 450){
+            if(x > 100 && x <= 350 && y >= 350 && y <= 450){
                 ui.eggCount++;
                 System.out.print("Egg Count: " + ui.eggCount);
                     if(ui.eggCount == 6){
@@ -27,6 +27,33 @@ public class MouseHandler implements MouseListener {
                     }
                 panel.repaint(); 
             }
+        }
+
+        if(ui.uiCount == 1){
+            if(x >= 400 && x <= 475 && y >= 275 && y <= 355){
+                if(ui.eggChoice < 3){
+                    ui.eggChoice++;
+                    panel.repaint();
+                    System.out.println("\n\nEgg Choice: " + ui.eggChoice);
+                }
+                else if(ui.eggChoice == 3){
+                    ui.eggChoice = 0;
+                    panel.repaint();
+                    System.out.println("\n\nEgg Choice: " + ui.eggChoice);
+                }
+            }
+            else if(x >= 40 && x <= 115 && y >= 275 && y <= 355){
+                if(ui.eggChoice > 0){
+                    ui.eggChoice--;
+                    panel.repaint();
+                    System.out.println("\n\nEgg Choice: " + ui.eggChoice);
+                }
+                else if(ui.eggChoice == 0){
+                    ui.eggChoice = 3;
+                    panel.repaint();
+                    System.out.println("\n\nEgg Choice: " + ui.eggChoice);
+                }
+            }               
         }
     }
     
