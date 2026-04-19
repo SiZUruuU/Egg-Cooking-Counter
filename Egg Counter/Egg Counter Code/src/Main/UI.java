@@ -10,7 +10,9 @@ public class UI {
     Image egg1, egg2, egg3, egg4, egg5, egg6, bg;
     Image rawegg, softegg, cookegg, overcookegg;
     Image leftarrow, rightarrow;
+    Image cook, cooking;
     int uiCount = 0, eggCount = 0, eggChoice = 0;
+    boolean timerStart = false;
     
 
     public UI(Panel panel){
@@ -31,6 +33,9 @@ public class UI {
         leftarrow = new ImageIcon(getClass().getResource("/res/asset/leftarrow.png")).getImage();
         rightarrow = new ImageIcon(getClass().getResource("/res/asset/righttarrow.png")).getImage();
 
+        cook = new ImageIcon(getClass().getResource("/res/asset/Cook.png")).getImage();
+        cooking = new ImageIcon(getClass().getResource("/res/asset/cooking.png")).getImage();
+
         bg = new ImageIcon(getClass().getResource("/res/asset/trial.png")).getImage();
 
     }
@@ -49,6 +54,7 @@ public class UI {
         }
         else if(uiCount == 2){
             panel.setBackground(Color.decode("#f4124f"));
+            drawImage(g2);
         }
     }
 
@@ -68,6 +74,7 @@ public class UI {
     
         else if(uiCount == 1){
             g2.drawImage(bg, 0,0,500,650,null);
+            g2.drawImage(cook,210,450,100,100,null);
 
             switch(eggChoice){
 
@@ -95,14 +102,14 @@ public class UI {
                     g2.drawImage(leftarrow, 40, 275,75,75,null);
                     break;
                 }
-
             }
-
-            // g2.drawImage(softegg,290,125,150,150,null);
-            // g2.drawImage(cookegg,70,325,150,150,null);
-            // g2.drawImage(overcookegg,290,325,150,150,null);
+        }
+        else if(uiCount == 2){
+            g2.drawImage(cooking,0,0,500,650,null);
+            timer(g2);
         }
     }
+
 
     public void screen(){}
     
@@ -141,7 +148,7 @@ public class UI {
 
     public void pickEggScreen(Graphics2D g2){
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35));
         String text = "HOW DO YOU WANT YOUR EGGS?";
 
         int x =  getXforCenteredText(g2, text);
@@ -150,6 +157,29 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
 
+    }
+
+    public void timer(Graphics2D g2){
+
+    if(!timerStart){
+        switch(eggChoice){
+                case 0 -> {panel.min = 3;}
+                case 1 -> {panel.min = 7;}
+                case 2 -> {panel.min = 11;}
+                case 3 -> {panel.min = 15;}
+        }
+        panel.sec = 59;
+        timerStart = true;
+    }
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 90));
+        String text = panel.min + ":" + String.format("%02d", panel.sec);;
+
+        int x =  getXforCenteredText(g2, text);
+        int y =  panel.screenHeight / 4;
+
+        g2.setColor(Color.black);
+        g2.drawString(text, x, y);
 
     }
 }

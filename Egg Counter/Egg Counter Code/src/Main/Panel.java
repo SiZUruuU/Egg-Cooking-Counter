@@ -1,17 +1,21 @@
 package src.Main;
-import java.io.InputStream;
 
+import java.io.InputStream;
 import java.awt.*;
 import java.io.IOException;
+import src.Assets.Sound;
 
 import javax.swing.*;
-import java.text.DecimalFormat;
 
 public class Panel extends JPanel {
 
     Graphics2D g2;
     UI ui = new UI(this);
+    Sound se = new Sound();
     MouseHandler mouse = new MouseHandler(ui, this);
+    
+    int sec = 60, min = 0;
+    int ticks = 0;
     
 
     final int screenWidth = 500;
@@ -41,44 +45,39 @@ public class Panel extends JPanel {
         if(ui.eggCount > 0){
             System.out.print("Clicked!");        
         }
+
+        Timer timer = new Timer(1000/120, e -> {
+            if(ui.uiCount == 2){ // only count during timer screen
+                ticks++;
+                if(ticks % 60 == 0){
+                    if(sec > 0){
+                        sec--;
+                    } else if(min > 0){
+                        sec = 59;
+                        min--;
+                    } else {
+                        playSound(0);
+                    }
+                }
+            }
+            repaint();
+        });
+        timer.start();
     }
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g); // ✅ Always call this first
+        super.paintComponent(g); 
 
-        Graphics2D g2 = (Graphics2D)g; // ✅ Cast to Graphics2D here
+        Graphics2D g2 = (Graphics2D)g; 
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
-        ui.draw(g2); // ✅ Pass g2 as a parameter
+        ui.draw(g2);
     }
 
-    // public void screen(){
-
-    // }
-
-    // public void title(Graphics2D g2){
-        
-    //     g2.setFont(g2.getFont().deriveFont(Font.BOLD, 90));
-    //     String text = "EGG COUNTER";
-
-    //     int x =  getXforCenteredText(g2, text);
-    //     int y =  screenHeight / 3;
-
-    //     g2.setColor(Color.black);
-    //     g2.drawString(text, x+6, y+6);
-
-    //     g2.setColor(Color.white);
-    //     g2.drawString(text, x, y);
-
-    // }
-
-    //     public int getXforCenteredText(Graphics2D g2, String text){
-
-    //     int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-    //     int x = (screenWidth - length) / 2;
-    //     return x;
-
-    // }
+    public void playSound(int i){
+        se.setFile(i);
+        se.play();
+        }
 }

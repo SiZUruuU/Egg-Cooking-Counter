@@ -21,11 +21,13 @@ public class MouseHandler implements MouseListener {
         if(ui.uiCount == 0){
             if(x > 100 && x <= 350 && y >= 350 && y <= 450){
                 ui.eggCount++;
-                System.out.print("Egg Count: " + ui.eggCount);
-                    if(ui.eggCount == 6){
-                        ui.uiCount++;
-                    }
-                panel.repaint(); 
+                    if(ui.eggCount < 6){panel.playSound(1);}
+
+                        System.out.print("Egg Count: " + ui.eggCount);
+                            if(ui.eggCount == 6){
+                                ui.uiCount++;
+                            }
+                            panel.repaint(); 
             }
         }
 
@@ -54,6 +56,12 @@ public class MouseHandler implements MouseListener {
                     System.out.println("\n\nEgg Choice: " + ui.eggChoice);
                 }
             }               
+        }
+
+        if(ui.uiCount == 1){
+            if(x >= 210 && x <= 310 && y >= 450 && y <= 550){
+                ui.uiCount++;
+            }
         }
     }
     
