@@ -16,6 +16,8 @@ public class Panel extends JPanel {
     
     int sec = 60, min = 0;
     int ticks = 0;
+
+    boolean alarmPlay = false;
     
 
     final int screenWidth = 500;
@@ -47,7 +49,7 @@ public class Panel extends JPanel {
         }
 
         Timer timer = new Timer(1000/120, e -> {
-            if(ui.uiCount == 2){ // only count during timer screen
+            if(ui.uiCount == 2){ 
                 ticks++;
                 if(ticks % 60 == 0){
                     if(sec > 0){
@@ -55,8 +57,9 @@ public class Panel extends JPanel {
                     } else if(min > 0){
                         sec = 59;
                         min--;
-                    } else {
-                        playSound(0);
+                    } else if(!alarmPlay) {
+                        playSound( 0);
+                        alarmPlay = true;
                     }
                 }
             }
@@ -79,5 +82,9 @@ public class Panel extends JPanel {
     public void playSound(int i){
         se.setFile(i);
         se.play();
-        }
+    }
+
+    public void stopSound(){
+        se.stop();
+    }
 }

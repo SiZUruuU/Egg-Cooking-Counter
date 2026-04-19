@@ -172,8 +172,10 @@ public class UI {
         timerStart = true;
     }
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 90));
-        String text = panel.min + ":" + String.format("%02d", panel.sec);;
+        String text = "";
+
+        if(panel.min == 0 && panel.sec == 0){g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40)); text = "CLICK POT TO END";}
+        else{g2.setFont(g2.getFont().deriveFont(Font.BOLD, 90)); text = panel.min + ":" + String.format("%02d", panel.sec);;}
 
         int x =  getXforCenteredText(g2, text);
         int y =  panel.screenHeight / 4;
@@ -182,4 +184,6 @@ public class UI {
         g2.drawString(text, x, y);
 
     }
+
+
 }

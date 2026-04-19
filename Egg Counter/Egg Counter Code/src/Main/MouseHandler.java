@@ -1,11 +1,13 @@
 package src.Main;
 
 import java.awt.event.*;
+import src.Assets.Sound;
 
 public class MouseHandler implements MouseListener {
 
     UI ui;
     Panel panel;
+    Sound stop;
 
     public MouseHandler(UI ui, Panel panel){
         this.ui = ui;
@@ -61,6 +63,22 @@ public class MouseHandler implements MouseListener {
         if(ui.uiCount == 1){
             if(x >= 210 && x <= 310 && y >= 450 && y <= 550){
                 ui.uiCount++;
+            }
+        }
+
+        if(ui.uiCount == 2){
+            if(panel.sec == 0 && panel.min == 0){
+                if(x >= 100 && x <= 400 && y >= 200 && y <= 400){
+                    ui.uiCount = 0;
+                    ui.eggChoice = 0;
+                    ui.eggCount = 0;
+                    panel.ticks = 0;
+                    panel.min = 0;
+                    panel.sec = 0;
+                    ui.timerStart = false;
+                    panel.alarmPlay = false;
+                    panel.stopSound();
+                }
             }
         }
     }
